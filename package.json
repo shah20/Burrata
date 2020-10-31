@@ -4,6 +4,7 @@
   "description": "Burrata",
   "main": "index.js",
   "scripts": {
+    "build": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "mongodb": "^3.6.2",
     "multer": "^1.4.2"
   }
 }
