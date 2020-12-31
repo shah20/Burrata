@@ -1,5 +1,5 @@
 var constants = {
-    dbUrl: "mongodb://localhost:27017"
+    dbUrl: process.env.BURRATA_DB_URL || "mongodb://localhost:27017"
 }
 
 module.exports = {
