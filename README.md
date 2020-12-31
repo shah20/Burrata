@@ -12,3 +12,6 @@ run npm run build command<br/>
 
 Postman collection link
 https://www.getpostman.com/collections/e75d2f95bdd91a31656b
+
+Application link
+https://burrata-rs.herokuapp.com
