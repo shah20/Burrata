@@ -4,9 +4,7 @@
   "description": "Burrata",
   "main": "index.js",
   "scripts": {
-    "build": "node index",
-    "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

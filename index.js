@@ -22,9 +22,6 @@ app.use(function (error, req, res, next) {
     console.log('Some Error occured')
 });
 
-var server = app.listen(port, function () {
-    var host = server.address().address
-    var port = server.address().port
-
-    console.log("Example app listening at http://%s:%s", host, port)
+app.listen(port, function () {
+    console.log("Server started on port ", port)
 })
