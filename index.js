@@ -19,7 +19,8 @@ app.get('*', function (req, res) {
 })
 
 app.use(function (error, req, res, next) {
-    console.log('Some Error occured')
+    console.log('Some Error occured');
+    console.log('Error', error);
 });
 
 app.listen(port, function () {
