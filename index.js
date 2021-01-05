@@ -3,9 +3,12 @@ const app = express();
 const bodyParser = require('body-parser')
 
 const port = process.env.PORT || 4000;
-const recipes = require('./routes/recipes').recipes;
-const feedback = require('./routes/feedback').feedback;
-const suggestions = require('./routes/suggestions').suggestions;
+const recipes = require('./src/routes/recipes');
+const feedback = require('./src/routes/feedback');
+const suggestions = require('./src/routes/suggestions');
+
+const logger = require('./src/utils/logger').getLogger('INDEX');
+const loggerPath = 'index';
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,10 +22,12 @@ app.get('*', function (req, res) {
 })
 
 app.use(function (error, req, res, next) {
-    console.log('Some Error occured');
-    console.log('Error', error);
+    logger.error(loggerPath + `.errorHandler error found ${ JSON.stringify(error) }`);
+    logger.error(loggerPath + `.errorHandler request body ${ JSON.stringify(req.body) }`);
+    logger.error(loggerPath + `.errorHandler request url ${ req.url }`);
+    res.status(500).send(error);
 });
 
 app.listen(port, function () {
-    console.log("Server started on port ", port)
+    logger.info(loggerPath + `.listen server started on port ${ port }`);
 })
