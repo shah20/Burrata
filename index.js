@@ -18,8 +18,8 @@ app.use('/recipes', recipes);
 app.use('/feedback', feedback);
 app.use('/suggestions', suggestions);
 
-app.get('*', function (req, res) {
-    res.send('Invalid request');
+app.all('*', function (req, res) {
+    res.status(404).send('Resource not found');
 })
 
 app.use(function (error, req, res, next) {
