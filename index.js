@@ -6,6 +6,7 @@ const port = process.env.PORT || 4000;
 const recipes = require('./src/routes/recipes');
 const feedback = require('./src/routes/feedback');
 const suggestions = require('./src/routes/suggestions');
+const { ResponseObject } = require('./src/models/responseObject');
 
 const logger = require('./src/utils/logger').getLogger('INDEX');
 const loggerPath = 'index';
@@ -25,7 +26,8 @@ app.use(function (error, req, res, next) {
     logger.error(loggerPath + `.errorHandler error found ${ JSON.stringify(error) }`);
     logger.error(loggerPath + `.errorHandler request body ${ JSON.stringify(req.body) }`);
     logger.error(loggerPath + `.errorHandler request url ${ req.url }`);
-    res.status(500).send(error);
+    const response = new ResponseObject(false, error);
+    res.status(500).send(response);
 });
 
 app.listen(port, function () {
