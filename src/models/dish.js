@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Dish = mongoose.model('Dish', {
-    dishName: { type: String, required: true, trim: true },
+const dishSchema = new mongoose.Schema({
+    dishName: { type: String, required: true, trim: true, unique: true },
     maxPreparationTime: { type: Number, required: true },
     isVegetarian: { type: Boolean, default: true },
     ingredients: Array,
@@ -11,5 +11,7 @@ const Dish = mongoose.model('Dish', {
     cons: { type: Array, default: [] },
     addOn: { type: Array, default: [] }
 });
+
+const Dish = mongoose.model('Dish', dishSchema);
 
 module.exports = Dish;

@@ -12,19 +12,19 @@ routes.post('/addDish', async (req, res) => {
     logger.info(loggerPath + `.addDish dish to add ${ JSON.stringify(req.body) }`);
 
     try {
-        const existingDishes = await Dish.countDocuments({ dishName: req.body.dishName });
-        if (existingDishes === 0) {
-            const dish = new Dish(req.body);
-            await dish.save();
-            logger.info(loggerPath + `.addDish dish added ${ JSON.stringify(dish) }`);
-            const response = new ResponseObject(true, dish);
-            res.status(201).send(response);
-        } else {
-            throw new Error('Duplicate dish name');
-        }
+        const dish = new Dish(req.body);
+        await dish.save();
+        logger.info(loggerPath + `.addDish dish added ${ JSON.stringify(dish) }`);
+        const response = new ResponseObject(true, dish);
+        res.status(201).send(response);
     } catch (error) {
         logger.error(loggerPath + `.addDish error while adding dish ${ error }`);
-        const response = new ResponseObject(false, error.message);
+        let response;
+        if (error.message.includes('duplicate')) {
+            response = new ResponseObject(false, 'Duplicate dish name');
+        } else {
+            response = new ResponseObject(false, error.message);
+        }
         res.status(500).send(response);
     }
 });
