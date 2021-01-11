@@ -103,7 +103,9 @@ routes.put('/updateDish', async (req, res) => {
     logger.info(loggerPath + `.updateDish dish to update ${ req.body.dishName }`);
     try {
         if (req.body.dishName) {
-            const dish = await Dish.findOneAndUpdate({ dishName: req.body.dishName }, { ...req.body, lastModifiedAt: new Date().getTime() }, { new: true });
+            const data = JSON.parse(JSON.stringify(req.body));
+            delete data.dishName;
+            const dish = await Dish.findOneAndUpdate({ dishName: new RegExp(req.body.dishName, 'i') }, { ...data, lastModifiedAt: new Date().getTime() }, { new: true });
 
             if (!dish) {
                 throw new Error('Dish not found');
