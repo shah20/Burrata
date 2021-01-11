@@ -1,7 +1,18 @@
 const mongoose = require('mongoose');
 
 const dishSchema = new mongoose.Schema({
-    dishName: { type: String, required: true, trim: true, unique: true },
+    dishName: {
+        type: String,
+        required: true,
+        trim: true,
+        index: {
+            unique: true,
+            collation: {
+                locale: 'en',
+                strength: 2
+            }
+        }
+    },
     maxPreparationTime: { type: Number, required: true },
     isVegetarian: { type: Boolean, default: true },
     ingredients: Array,
