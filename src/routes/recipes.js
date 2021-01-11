@@ -97,6 +97,29 @@ routes.delete('/removeDish/:dishName', async (req, res) => {
         const response = new ResponseObject(false, error.message);
         res.status(500).send(response);
     }
-})
+});
+
+routes.put('/updateDish', async (req, res) => {
+    logger.info(loggerPath + `.updateDish dish to update ${ req.body.dishName }`);
+    try {
+        if (req.body.dishName) {
+            const dish = await Dish.findOneAndUpdate({ dishName: req.body.dishName }, { ...req.body, lastModifiedAt: new Date().getTime() }, { new: true });
+
+            if (!dish) {
+                throw new Error('Dish not found');
+            }
+
+            logger.info(loggerPath + `.updateDish updated dish ${ JSON.stringify(dish) }`);
+            const response = new ResponseObject(true, dish);
+            res.status(200).send(response);
+        } else {
+            throw new Error('Please provide dish name');
+        }
+    } catch (error) {
+        logger.error(loggerPath + `.updateDish error while updating dish ${ error }`);
+        const response = new ResponseObject(false, error.message);
+        res.status(500).send(response);
+    }
+});
 
 module.exports = routes;
