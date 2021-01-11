@@ -13,6 +13,8 @@ routes.post('/addDish', async (req, res) => {
 
     try {
         const dish = new Dish(req.body);
+        dish.createdAt = new Date().getTime();
+        dish.lastModifiedAt = new Date().getTime();
         await dish.save();
         logger.info(loggerPath + `.addDish dish added ${ JSON.stringify(dish) }`);
         const response = new ResponseObject(true, dish);

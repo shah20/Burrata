@@ -9,7 +9,9 @@ const dishSchema = new mongoose.Schema({
     recipe: Array,
     pros: { type: Array, default: [] },
     cons: { type: Array, default: [] },
-    addOn: { type: Array, default: [] }
+    addOn: { type: Array, default: [] },
+    createdAt: Number,
+    lastModifiedAt: Number
 });
 
 const Dish = mongoose.model('Dish', dishSchema);
