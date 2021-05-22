@@ -6,6 +6,7 @@ const port = process.env.PORT || 4000;
 const recipes = require('./src/routes/recipes');
 const feedback = require('./src/routes/feedback');
 const suggestions = require('./src/routes/suggestions');
+const user = require('./src/routes/user')
 const { ResponseObject } = require('./src/models/responseObject');
 
 const logger = require('./src/utils/logger').getLogger('INDEX');
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/recipes', recipes);
 app.use('/feedback', feedback);
 app.use('/suggestions', suggestions);
+app.use('/user', user);
 
 app.all('*', function (req, res) {
     res.status(404).send('Resource not found');

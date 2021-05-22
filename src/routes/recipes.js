@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = express();
+const auth = require('../middleware/auth')
 const ResponseObject = require('../models/responseObject').ResponseObject;
 
 const logger = require('../utils/logger').getLogger('RECIPES');
@@ -13,6 +14,7 @@ routes.post('/addDish', async (req, res) => {
 
     try {
         const dish = new Dish(req.body);
+        // dish.createdBy = req.user.mobileNo;
         dish.createdAt = new Date().getTime();
         dish.lastModifiedAt = new Date().getTime();
         await dish.save();
