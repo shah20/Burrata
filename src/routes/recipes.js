@@ -38,7 +38,7 @@ routes.post('/getDishes', async (req, res) => {
     req.body.dishName ? dish['dishName'] = new RegExp(req.body.dishName, 'i') : null;
     req.body.isVegetarian ? dish['isVegetarian'] = req.body.isVegetarian : null;
     req.body.maxPreparationTime ? dish['maxPreparationTime'] = { $lte: req.body.maxPreparationTime } : null;
-    req.body.userName ? dish['userName'] = req.body.userName : null;
+    req.body.createdBy ? dish['createdBy'] = req.body.createdBy : null;
 
     if (req.body.ingredients) {
         const criterias = [];

@@ -21,7 +21,7 @@ const dishSchema = new mongoose.Schema({
     pros: { type: Array, default: [] },
     cons: { type: Array, default: [] },
     addOn: { type: Array, default: [] },
-    userName: { type: String, required: true },
+    createdBy: { type: String, required: true },
     createdAt: Number,
     lastModifiedAt: Number
 });
